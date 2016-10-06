@@ -127,6 +127,25 @@ namespace dsacpp
 				binSearch(e,lo,hi) : fibSearch(e,lo,hi);
 		}
 
+		//排序
+		void sort(Rank lo,Rank hi)
+		{
+			switch(rand() % 3)
+			{
+			case 1:
+				bubbleSort(lo,hi);
+				break;
+			case 2:
+				selectionSort(lo,hi);
+				break;
+			case 3:
+				mergeSort(lo,hi);
+				break;
+			default:
+				bubbleSort(lo,hi);
+			}
+		}
+
 
     //method 
 	protected:
@@ -140,8 +159,20 @@ namespace dsacpp
 			}
 		}
 	private:
+		//扩容
 		void expand();
+		//缩容
 		void shrink();
+		//冒泡排序
+		bool bubble_1(Rank lo,Rank hi);
+		int  bubble(Rank lo,Rank hi);
+		void bubbleSort(Rank lo,Rank hi);
+		//选择排序
+		Rank selection(Rank lo,Rank hi);
+		void selectionSort(Rank lo,Rank hi);
+		//归并排序
+		void merge(Rank lo,Rank mi,Rank hi);
+		void mergeSort(Rank lo,Rank hi);
 	//data
 	protected:
 		T* elem_;
@@ -419,6 +450,71 @@ namespace dsacpp
 			}
 		}
 		return -1;
+	}
+
+	//冒泡排序
+	template <typename T>
+	inline bool Vector<T>::bubble_1(Rank lo,Rank hi)
+	{
+		bool sorted = true;
+		while(++lo < hi)
+		{
+			if(elem_[lo - 1] > elem_[lo] )
+			{
+				sorted = false;
+				std::swap(elem_[lo-1],elem_[lo])
+			}
+		}
+		return sorted;
+	}
+	template <typename T>
+	inline int Vector<T>::bubble(Rank lo,Rank hi)
+	{
+		Rank last = lo;
+		while(++lo < hi)
+		{
+			if(elem_[lo - 1] > elem_[lo] )
+			{
+				last = lo;
+				std::swap(elem_[lo-1],elem_[lo])
+			}
+		}
+		return last;
+	}
+	template <typename T>
+	inline void Vector<T>::bubbleSort(Rank lo,Rank hi)
+	{
+    #define V2
+	#ifdef V1
+		while(!bubble_1(lo,hi--));
+	#endif 
+	#ifdef V2
+		while(lo < (hi = bubble(lo,hi)));
+	#endif 
+	#undef V2
+	}
+
+	//选择排序
+	template <typename T>
+	Rank Vector<T>::selection(Rank lo,Rank hi) //find the max in [lo,hi]
+	{
+		Rank index= lo;
+		for(Rank i = lo + 1; i <= hi; ++i)
+		{
+			if( elem_[index] < elem_[i])
+			{
+				index = i;
+			}
+		}
+		return index;
+	}
+	template <typename T>
+	void Vector<T>::selectionSort(Rank lo,Rank hi)
+	{
+		while(lo < --hi)
+		{
+			std::swap(elem_[hi],elem_[selection(lo,hi)])
+		}
 	}
 
 }
