@@ -1,5 +1,7 @@
-﻿Build started 10/1/2016 2:16:07 PM.
-Project "D:\DSACPP\Fundamental\Fundamental.vcxproj" on node 2 (build target(s)).
+﻿Build started 10/7/2016 8:28:54 PM.
+Project "D:\DSACPP\Fundamental\Fundamental.vcxproj" on node 2 (rebuild target(s)).
+_PrepareForClean:
+  Deleting file "Debug\Fundamental.lastbuildstate".
 InitializeBuildStatus:
   Creating "Debug\Fundamental.unsuccessfulbuild" because "AlwaysCreate" was specified.
 ClCompile:
@@ -11,6 +13,7 @@ Link:
   C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\DSACPP\Fundamental\Debug\Fundamental.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\Fundamental.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\DSACPP\Fundamental\Debug\Fundamental.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\DSACPP\Fundamental\Debug\Fundamental.lib" /MACHINE:X86 Debug\Fundamental.exe.embed.manifest.res
   Debug\main.obj
 Manifest:
+  Deleting file "Debug\Fundamental.exe.embed.manifest".
   C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\Fundamental.exe.embed.manifest" /manifest Debug\Fundamental.exe.intermediate.manifest
   C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\Fundamental.exe.embed.manifest.res" Debug\Fundamental_manifest.rc 
 LinkEmbedManifest:
@@ -20,8 +23,8 @@ LinkEmbedManifest:
 FinalizeBuildStatus:
   Deleting file "Debug\Fundamental.unsuccessfulbuild".
   Touching "Debug\Fundamental.lastbuildstate".
-Done Building Project "D:\DSACPP\Fundamental\Fundamental.vcxproj" (build target(s)).
+Done Building Project "D:\DSACPP\Fundamental\Fundamental.vcxproj" (rebuild target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:03.07
+Time Elapsed 00:00:01.62

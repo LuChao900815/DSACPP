@@ -18,7 +18,7 @@ namespace dsacpp
 		//缺省构造函数
 		Vector(Rank capacity = CAPACITY,Rank s = 0,T v = 0) : capacity_(capacity),size_(s)
 		{
-			T* elem_ = new T[capacity_];
+			elem_ = new T[capacity_];
 			for(int i = 0; i < capacity; ++i)
 			{
 				elem_[i] = v;
@@ -36,13 +36,11 @@ namespace dsacpp
 
 		Vector(const Vector<T>& V)
 		{
-			delete[] elem_;
 			copyFrom(V.elem_,0,V.size_);
 		}
 
 		Vector(const Vector<T>& V,Rank lo,Rank hi)
 		{
-			delete[] elem_;
 			copyFrom(V.elem_,lo,hi);
 		}
 
@@ -82,13 +80,14 @@ namespace dsacpp
 		T& operator[](const Rank position) const
 		{
 			assert(position >= 0 && position < size_);
-			return elem_[postion];
+			return elem_[position];
 		}
 
 		//置乱器
 		void permute(Vector<T>& v);
 
 		//区间置乱器
+		void unsort() {unsort(0,size_);}
 		void unsort(const Rank lo, const Rank hi);
 
 		//无序查找
@@ -126,8 +125,12 @@ namespace dsacpp
 			return (rand() % 2) ? 
 				binSearch(e,lo,hi) : fibSearch(e,lo,hi);
 		}
-
+		Rank search(const T& e)
+		{
+			return search(e,0,size_);
+		}
 		//排序
+		void sort() {sort(0,size_);}
 		void sort(Rank lo,Rank hi)
 		{
 			switch(rand() % 3)
@@ -217,12 +220,12 @@ namespace dsacpp
 		}
 
 		T*oldElem = elem_;
-		elem_ = new T[capacity >>= 1];
+		elem_ = new T[capacity_ >>= 1];
 		for(int i = 0; i < size_; ++i)
 		{
 			elem_[i] = oldElem[i];
 		}
-		delete []oldElem_;
+		delete []oldElem;
 	}
 
 	//置乱器
@@ -239,7 +242,7 @@ namespace dsacpp
 	template <typename T>
 	inline void Vector<T>::unsort(const Rank lo,const Rank hi)
 	{
-		T* v = _elem + lo;
+		T* v = elem_ + lo;
 		for(Rank i = hi - lo; i > 0; i--)
 		{
 			std::swap(v[i - 1],v[rand() % i]);
@@ -258,12 +261,12 @@ namespace dsacpp
 	template <typename T>
 	inline Rank Vector<T>::find(const T& e)
 	{
-		find(e,0,size_);
+		return find(e,0,size_);
 	}
 
 	//插入
 	template <typename T>
-	inline Rank insert(Rank r,const T& e)
+	inline Rank Vector<T>::insert(Rank r,const T& e)
 	{
 		expand();
 		for(int i = size_; i > r; i--)
@@ -290,7 +293,7 @@ namespace dsacpp
 		}
 		size_ = lo;
 		shrink();
-		return odlSize - size_;
+		return oldSize - size_;
 	}
 
 	template <typename T>
@@ -322,7 +325,7 @@ namespace dsacpp
 	{
 		for(int i = 0; i < size_; ++i)
 		{
-			traverse(elem_[i]);
+			visit(elem_[i]);
 		}
 	}
 
@@ -332,7 +335,7 @@ namespace dsacpp
 	{
 		for(int i = 0; i < size_; ++i)
 		{
-			traverse(elem_[i]);
+			visit(elem_[i]);
 		}
 	}
 
@@ -370,7 +373,7 @@ namespace dsacpp
 		Rank i = 0, j = 0;
 		while(++j < size_)
 		{
-			if(elem_[i] != elem[j])
+			if(elem_[i] != elem_[j])
 			{
 				elem_[++i] = elem_[j];
 			}
@@ -417,7 +420,7 @@ namespace dsacpp
 		{
 			Rank mi = (hi + lo) >> 1;
 
-			(e < A[mi]) ? hi = mi : lo = mi + 1;
+			(e < elem_[mi]) ? hi = mi : lo = mi + 1;
 		}
 		return --lo;
 	#endif
@@ -428,7 +431,7 @@ namespace dsacpp
 	template <typename T>
 	Rank Vector<T>::fibSearch(const T& e, Rank lo,Rank hi) const
 	{
-		DSCPP::Fib fib(hi - lo);
+		dsacpp::Fib fib(hi - lo);
 		while(lo < hi)
 		{
 			while(hi - lo < fib.get())
@@ -476,7 +479,7 @@ namespace dsacpp
 			if(elem_[lo - 1] > elem_[lo] )
 			{
 				last = lo;
-				std::swap(elem_[lo-1],elem_[lo])
+				std::swap(elem_[lo-1],elem_[lo]);
 			}
 		}
 		return last;
@@ -513,8 +516,50 @@ namespace dsacpp
 	{
 		while(lo < --hi)
 		{
-			std::swap(elem_[hi],elem_[selection(lo,hi)])
+			std::swap(elem_[hi],elem_[selection(lo,hi)]);
 		}
+	}
+
+	//归并排序
+	template <typename T>
+	void Vector<T>::merge(Rank lo,Rank mi,Rank hi)
+	{
+		int lb = mi - lo;
+		int lc = hi - mi;
+		T* A = elem_ + lo;
+		T* B = new T[lb];
+		for(int i = 0; i < lb; ++i)
+		{
+			B[i] = A[i];
+		}
+
+		T* C = elem_ + mi;
+
+		for(Rank i = 0, j = 0,k = 0; (i < lb || j < lc); )
+		{
+			if((i < lb) && (!(j < lc) || B[i] < C[j])) 
+			{
+				A[k++] = B[i++];
+			}
+			if((j < lc) && (!(i < lb) || C[j] <= B[i]))
+			{
+				A[k++] = C[j++];
+			}
+		}
+		delete []B;
+	}
+
+	template <typename T>
+	void Vector<T>::mergeSort(Rank lo,Rank hi)
+	{
+		if(hi - lo < 2)
+		{
+			return;
+		}
+		Rank mi = (hi + lo) >> 1;
+		mergeSort(lo,mi);
+		mergeSort(mi,hi);
+		merge(lo,mi,hi);
 	}
 
 }
