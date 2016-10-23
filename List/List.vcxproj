@@ -76,6 +76,7 @@
   <ItemGroup>
     <ClInclude Include="List.h" />
     <ClInclude Include="listNode.h" />
+    <ClInclude Include="list_test.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />

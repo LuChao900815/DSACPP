@@ -35,6 +35,7 @@ template <typename T> static void print ( T& x ) {  UniPrint::p ( x );  }
 template <typename T> static void print ( const T& x ) {  UniPrint::p ( x );  } //for Stack
 static void print ( char* x ) {  printf ( " %s", x ? x : "<NULL>" );  } //×Ö·û´®ÌØ±ð´¦Àí
 static void print ( const char* x ) {  printf ( " %s", x ? x : "<NULL>" );  } //×Ö·û´®ÌØ±ð´¦Àí
+//static void print (const int& x) {printf("%d",x);}
 
 class UniPrint {
 public:

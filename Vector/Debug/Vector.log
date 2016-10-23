@@ -1,4 +1,4 @@
-﻿Build started 10/7/2016 9:19:37 PM.
+﻿Build started 10/23/2016 3:05:52 PM.
 Project "D:\DSACPP\Vector\Vector.vcxproj" on node 2 (build target(s)).
 InitializeBuildStatus:
   Creating "Debug\Vector.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -23,4 +23,4 @@ Done Building Project "D:\DSACPP\Vector\Vector.vcxproj" (build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:02.68
+Time Elapsed 00:00:01.85

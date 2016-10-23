@@ -74,7 +74,7 @@ namespace dsacpp
 		//反转列表
 		void reverse();
 		//遍历
-		void travese(void(*visit)(T&));
+		void traverse(void(*visit)(T&));
 		template <typename VST>
 		void traverse(VST& visit);
 	};
@@ -116,14 +116,14 @@ namespace dsacpp
 	{
 		for(int i = 0; i < n; ++i)
 		{
-			insertAfter(search(p->data,r,p),p->data);
+			insertAfter(search(p->data,i,p),p->data);
 			p = p->succ;
 			remove(p->pred);
 		}
 	}
 	//选择排序
 	template <typename T>
-	void selectionSort(ListNodePosi(T) p,int n)
+	void List<T>::selectionSort(ListNodePosi(T) p,int n)
 	{
 		ListNodePosi(T) head = p->pred;
 		ListNodePosi(T) tail = p;
@@ -175,8 +175,8 @@ namespace dsacpp
 	template <typename T>
 	T& List<T>::operator[](Rank index)
 	{
-		ListNodePosi(T) p = L.first();
-		for(int i = 0; i < r; ++i)
+		ListNodePosi(T) p = first();
+		for(int i = 0; i < index; ++i)
 		{
 			p = p->succ;
 		}
@@ -206,7 +206,7 @@ namespace dsacpp
 		return find(e,size_,trailer);
 	}
 	template <typename T>
-	ListNodePosi(T) find(const T& e,int n,ListNodePosi(T) p)
+	ListNodePosi(T) List<T>::find(const T& e,int n,ListNodePosi(T) p) const
 	{
 		while(n-- > 0)
 		{
@@ -259,22 +259,26 @@ namespace dsacpp
 	template <typename T>
 	ListNodePosi(T) List<T>::insertAsFirst(const T& e)
 	{
+		size_++;
 		return header->insertAsSucc(e);
 	}
 	template <typename T>
 	ListNodePosi(T) List<T>::insertAsLast(const T& e)
 	{
+		size_++;
 		return trailer->insertAsPred(e);
 	}
 	template <typename T>
 	ListNodePosi(T) List<T>::insertAfter(ListNodePosi(T) p,const T& e)
 	{
-		p->insertAsSucc(e);
+		size_++;
+		return p->insertAsSucc(e);
 	}
 	template <typename T>
 	ListNodePosi(T) List<T>::insertBefore(ListNodePosi(T) p,const T& e)
 	{
-		p->insertAsPred(e);
+		size_++;
+		return p->insertAsPred(e);
 	}
 
 	//删除
@@ -311,8 +315,8 @@ namespace dsacpp
 		int r = 1;
 		while((head = head->succ) != trailer)
 		{
-			(ListNodePosi(T) p = find(head->data,r,head)) == NULL ?
-				r++ : remove(p)
+			ListNodePosi(T) p = find(head->data,r,head) ;
+			p == NULL ? r++ : remove(p);
 		}
 		return oldSize - size_;
 	}
@@ -351,7 +355,7 @@ namespace dsacpp
 	}
 	//遍历
 	template <typename T>
-	void List<T>::travese(void(*visit)(T&))
+	void List<T>::traverse(void(*visit)(T&))
 	{
 		ListNodePosi(T) head = first();
 		while(head != trailer)

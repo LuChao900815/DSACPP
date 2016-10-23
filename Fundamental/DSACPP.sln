@@ -7,6 +7,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Vector", "..\Vector\Vector.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "List", "..\List\List.vcxproj", "{0C12ABEF-CC48-4CA0-AA72-174226C8F491}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Stack", "..\Stack\Stack.vcxproj", "{DF9E77C8-27CF-4E0C-82F1-14E2F0CB27B7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Queue", "..\Queue\Queue.vcxproj", "{AB298886-AD17-4043-980A-0B58C1E0A140}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -25,6 +29,14 @@ Global
 		{0C12ABEF-CC48-4CA0-AA72-174226C8F491}.Debug|Win32.Build.0 = Debug|Win32
 		{0C12ABEF-CC48-4CA0-AA72-174226C8F491}.Release|Win32.ActiveCfg = Release|Win32
 		{0C12ABEF-CC48-4CA0-AA72-174226C8F491}.Release|Win32.Build.0 = Release|Win32
+		{DF9E77C8-27CF-4E0C-82F1-14E2F0CB27B7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DF9E77C8-27CF-4E0C-82F1-14E2F0CB27B7}.Debug|Win32.Build.0 = Debug|Win32
+		{DF9E77C8-27CF-4E0C-82F1-14E2F0CB27B7}.Release|Win32.ActiveCfg = Release|Win32
+		{DF9E77C8-27CF-4E0C-82F1-14E2F0CB27B7}.Release|Win32.Build.0 = Release|Win32
+		{AB298886-AD17-4043-980A-0B58C1E0A140}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AB298886-AD17-4043-980A-0B58C1E0A140}.Debug|Win32.Build.0 = Debug|Win32
+		{AB298886-AD17-4043-980A-0B58C1E0A140}.Release|Win32.ActiveCfg = Release|Win32
+		{AB298886-AD17-4043-980A-0B58C1E0A140}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
